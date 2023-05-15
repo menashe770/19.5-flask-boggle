@@ -50,8 +50,7 @@ class Boggle():
         if x > 4 or y > 4:
             return
 
-        # This is called recursively to find smaller and smaller words
-        # until all tries are exhausted or until success.
+        # This is called recursively to find smaller and smaller words until all tries are exhausted or until success.
 
         # Base case: this isn't the letter we're looking for.
 
@@ -115,8 +114,7 @@ class Boggle():
     def find(self, board, word):
         """Can word be found in board?"""
 
-        # Find starting letter --- try every spot on board and,
-        # win fast, should we find the word at that place.
+        # Find starting letter --- try every spot on board and, win fast, should we find the word at that place.
 
         for y in range(0, 5):
             for x in range(0, 5):
@@ -124,6 +122,5 @@ class Boggle():
                     return True
 
         # We've tried every path from every starting square w/o luck.
-        # Sad panda.
 
         return False
