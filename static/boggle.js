@@ -3,6 +3,10 @@ class BoggleGame {
     $('.add-word').on('submit', this.handleSubmit.bind(this));
   }
 
+  showMessage(msg) {
+    $('.msg').text(msg);
+  }
+
   async handleSubmit(e) {
     e.preventDefault();
 
@@ -12,6 +16,8 @@ class BoggleGame {
     if (!word) return;
 
     const response = await axios.get('/check-word', { params: { word: word } });
+
+    this.showMessage(response.data.result);
   }
 }
 
