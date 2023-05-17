@@ -19,11 +19,18 @@
           {% endfor %}
         </tbody>
       </table>
+      <p>
+        Score:
+        <b class="score">0</b>
+      </p>
       <form action="" method="post" class="add-word">
         <input type="text" name="word" class="word" autofocus />
         <button>Enter</button>
       </form>
       <p class="msg"></p>
+      <ul class="added">
+        <b> Added Words:</b>
+      </ul>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
