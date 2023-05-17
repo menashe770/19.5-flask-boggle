@@ -31,6 +31,10 @@ class BoggleGame {
     }
   }
 
+  resetInput() {
+    $('.add-word').trigger('reset');
+  }
+
   async handleSubmit(e) {
     e.preventDefault();
 
@@ -41,7 +45,7 @@ class BoggleGame {
 
     if (this.words.has(word)) {
       this.showMessage(`"${word}" already used`);
-      $('.add-word').trigger('reset');
+      this.resetInput();
       return;
     }
 
@@ -58,7 +62,7 @@ class BoggleGame {
       this.words.add(word);
       $('.added').append('<li>' + word + '</li>');
     }
-    $('.add-word').trigger('reset');
+    this.resetInput();
 
     // this.showMessage(response.data.result);
   }
