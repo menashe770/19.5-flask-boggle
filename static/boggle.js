@@ -1,9 +1,12 @@
 class BoggleGame {
-  constructor() {
+  constructor(secs = 60) {
     $('.add-word').on('submit', this.handleSubmit.bind(this));
 
     this.score = 0;
     this.words = new Set();
+    this.secs = secs;
+    this.showTimer();
+    this.timer = setInterval(this.tick.bind(this), 1000);
   }
 
   showScore() {
@@ -12,6 +15,20 @@ class BoggleGame {
 
   showMessage(msg) {
     $('.msg').text(msg);
+  }
+
+  showTimer() {
+    $('.timer').text(this.secs);
+  }
+
+  tick() {
+    this.secs -= 1;
+    this.showTimer();
+
+    if (this.secs === 0) {
+      clearInterval(this.timer);
+      $('.word').prop('disabled', true);
+    }
   }
 
   async handleSubmit(e) {
