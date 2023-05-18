@@ -4,12 +4,12 @@ from boggle import Boggle
 boggle_game = Boggle()
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "seekret"
+app.config["SECRET_KEY"] = "secret"
 
 
 @app.route("/")
 def homepage():
-    """Show Board"""
+    """Show the Boggle board"""
 
     board = boggle_game.make_board()
     session["board"] = board
@@ -19,6 +19,8 @@ def homepage():
 
 @app.route("/check-word")
 def check_word():
+    """Check if a word is valid on the Boggle board"""
+
     word = request.args["word"]
     board = session["board"]
     response = boggle_game.check_valid_word(board, word)
@@ -32,6 +34,8 @@ highest_score = 0
 
 @app.route("/keep-score", methods=["POST"])
 def keep_score():
+    """Keep track of the game score and highest score"""
+
     global played_times, highest_score
 
     score = request.json.get("score")
@@ -39,10 +43,3 @@ def keep_score():
     highest_score = max(highest_score, score)
 
     return jsonify({"success": True})
-
-
-@app.route("/reset-score")
-def reset_score():
-    session["high_score"] = 0
-
-    return jsonify({"message": "High score reset successfully"})

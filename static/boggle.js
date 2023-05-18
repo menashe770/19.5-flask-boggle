@@ -2,6 +2,7 @@ class BoggleGame {
   constructor(secs = 60) {
     $('.add-word').on('submit', this.handleSubmit.bind(this));
 
+    // Button click to reload and start new game
     $('.new-game').on('click', function () {
       location.reload();
     });
@@ -15,34 +16,42 @@ class BoggleGame {
     this.timer = setInterval(this.tick.bind(this), 1000);
   }
 
+  // Update high score on the page
   updateHighScore(score) {
     $('.high-score').text(score);
   }
 
+  // Save high score to local storage
   saveHighScore() {
     localStorage.setItem('highScore', this.highScore);
   }
 
+  // Load high score from local storage
   loadHighScore() {
     return parseInt(localStorage.getItem('highScore'));
   }
 
+  // Display high score on the page
   updateHighScore() {
     $('.high-score').text(this.highScore);
   }
 
+  // Show current score on the page
   showScore() {
     $('.score').text(this.score);
   }
 
+  // Show a message on the page
   showMessage(msg) {
     $('.msg').text(msg);
   }
 
+  // Show the remaining time on the page
   showTimer() {
     $('.timer').text(this.secs);
   }
 
+  // Handle each tick of the timer
   async tick() {
     this.secs -= 1;
     this.showTimer();
@@ -54,10 +63,12 @@ class BoggleGame {
     }
   }
 
+  // Reset the input field
   resetInput() {
     $('.add-word').trigger('reset');
   }
 
+  // Handle the form submission when a word is entered
   async handleSubmit(e) {
     e.preventDefault();
 
@@ -88,6 +99,7 @@ class BoggleGame {
     this.resetInput();
   }
 
+  // Score the game when time is up
   async scoreGame() {
     const response = await axios.post('/keep-score', { score: this.score });
     if (this.score > this.highScore) {
