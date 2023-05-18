@@ -24,3 +24,18 @@ def check_word():
     response = boggle_game.check_valid_word(board, word)
 
     return jsonify({"result": response})
+
+
+played_times = 0
+highest_score = 0
+
+
+@app.route("/keep-score", methods=["POST"])
+def keep_score():
+    global played_times, highest_score
+
+    score = request.json.get("score")
+    played_times += 1
+    highest_score = max(highest_score, score)
+
+    return jsonify({"success": True})

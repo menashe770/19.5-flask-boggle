@@ -1,12 +1,18 @@
 class BoggleGame {
-  constructor(secs = 120) {
+  constructor(secs = 60) {
     $('.add-word').on('submit', this.handleSubmit.bind(this));
 
     this.score = 0;
+    this.highScore = 0;
+    this.updateHighScore();
     this.words = new Set();
     this.secs = secs;
     this.showTimer();
     this.timer = setInterval(this.tick.bind(this), 1000);
+  }
+
+  updateHighScore() {
+    $('.high-score').text(this.highScore);
   }
 
   showScore() {
@@ -21,13 +27,14 @@ class BoggleGame {
     $('.timer').text(this.secs);
   }
 
-  tick() {
+  async tick() {
     this.secs -= 1;
     this.showTimer();
 
     if (this.secs === 0) {
       clearInterval(this.timer);
       $('.word').prop('disabled', true);
+      await this.scoreGame();
     }
   }
 
@@ -63,8 +70,14 @@ class BoggleGame {
       $('.added').append('<li>' + word + '</li>');
     }
     this.resetInput();
+  }
 
-    // this.showMessage(response.data.result);
+  async scoreGame() {
+    const response = await axios.post('/keep-score', { score: this.score });
+    if (this.score > this.highScore) {
+      this.highScore = this.score;
+      this.updateHighScore();
+    }
   }
 }
 

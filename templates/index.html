@@ -7,6 +7,12 @@
     <title>Boggle</title>
   </head>
   <body>
+    <h1>Boggle!</h1>
+    <p>
+      High Score:
+      <b class="high-score"></b>
+    </p>
+
     <section>
       <table class="board">
         <tbody>
@@ -19,20 +25,25 @@
           {% endfor %}
         </tbody>
       </table>
+
       <p>
-        Score:
+        Current Score:
         <b class="score">0</b>
       </p>
+
       <p>
         Timer:
         <b class="timer"></b>
         seconds
       </p>
+
       <form action="" method="post" class="add-word">
         <input type="text" name="word" class="word" autofocus />
         <button>Enter</button>
       </form>
+
       <p class="msg"></p>
+
       <ul class="added">
         <b> Added Words:</b>
       </ul>
