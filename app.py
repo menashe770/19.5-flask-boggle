@@ -39,3 +39,10 @@ def keep_score():
     highest_score = max(highest_score, score)
 
     return jsonify({"success": True})
+
+
+@app.route("/reset-score")
+def reset_score():
+    session["high_score"] = 0
+
+    return jsonify({"message": "High score reset successfully"})

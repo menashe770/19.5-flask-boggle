@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.board {
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.board td {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #ccc;
+  font-weight: bold;
+}
+
+.score,
+.timer {
+  font-size: 20px;
+}
+
+.new-game {
+  margin-bottom: 5px;
+}
+
+.add-word input {
+  padding: 5px;
+}
+
+.add-word button {
+  padding: 5px 10px;
+  margin-left: 10px;
+}
+
+.msg {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.added {
+  margin-top: 10px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.high-score {
+  font-weight: bold;
+}

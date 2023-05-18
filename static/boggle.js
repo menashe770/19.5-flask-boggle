@@ -2,13 +2,29 @@ class BoggleGame {
   constructor(secs = 60) {
     $('.add-word').on('submit', this.handleSubmit.bind(this));
 
+    $('.new-game').on('click', function () {
+      location.reload();
+    });
+
     this.score = 0;
-    this.highScore = 0;
+    this.highScore = this.loadHighScore() || 0;
     this.updateHighScore();
     this.words = new Set();
     this.secs = secs;
     this.showTimer();
     this.timer = setInterval(this.tick.bind(this), 1000);
+  }
+
+  updateHighScore(score) {
+    $('.high-score').text(score);
+  }
+
+  saveHighScore() {
+    localStorage.setItem('highScore', this.highScore);
+  }
+
+  loadHighScore() {
+    return parseInt(localStorage.getItem('highScore'));
   }
 
   updateHighScore() {
@@ -77,6 +93,7 @@ class BoggleGame {
     if (this.score > this.highScore) {
       this.highScore = this.score;
       this.updateHighScore();
+      this.saveHighScore();
     }
   }
 }
